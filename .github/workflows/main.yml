@@ -1,0 +1,35 @@
+name: run-selenium-parallelization
+on:
+  # Triggers the workflow on push or pull request events but only for the develop branch
+#   push:
+#     branches: [ main ]
+    
+  workflow_dispatch:
+  
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    strategy:
+     matrix:
+      job: [0, 1, 2]   
+        
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+
+      - name: Check out repository code
+        uses: actions/checkout@v2
+        timeout-minutes: 10
+        
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install libraries
+        run: npm install 
+        timeout-minutes: 10
+        
+      - name: Run Tests
+        continue-on-error: true
+        run:  npm test              
+          
