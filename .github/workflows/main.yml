@@ -12,11 +12,24 @@ jobs:
     strategy:
      matrix:
       job: [0, 1, 2]   
-    container: selenium/chrome
+    container: selenium/standalone-chrome:latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
+     
+      - name: Check out repository code
+        uses: actions/checkout@v2
+        timeout-minutes: 10
+
+      - name: Install libraries
+        run: npm install --save-dev @cucumber/pretty-formatter @cucumber/cucumber selenium-webdriver assert chromedriver   
+        timeout-minutes: 10
+        
+      - name: Run Tests
+        continue-on-error: true
+        run:  npm run test       
+          
+       
+      - name: Generate report
+        uses: actions/upload-artifact@v2
         with:
-          node-version: "16"
-      - run: npm install && npm test
+         name: Myreport.html
+         path: "**/cucumber-report.html"       
