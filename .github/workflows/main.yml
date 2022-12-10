@@ -12,9 +12,10 @@ jobs:
     strategy:
      matrix:
       job: [0, 1, 2]   
-    container: selenium/standalone-chrome:latest
+        
     steps:
-     
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+
       - name: Check out repository code
         uses: actions/checkout@v2
         timeout-minutes: 10
@@ -32,4 +33,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
          name: Myreport.html
-         path: "**/cucumber-report.html"       
+         path: "**/cucumber-report.html"      
