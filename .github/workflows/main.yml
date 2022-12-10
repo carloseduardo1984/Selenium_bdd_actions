@@ -19,6 +19,11 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
         timeout-minutes: 10
+        
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
 
       - name: Install libraries
         run: npm install --save-dev @cucumber/pretty-formatter @cucumber/cucumber selenium-webdriver assert chromedriver   
