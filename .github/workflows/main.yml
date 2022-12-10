@@ -28,5 +28,12 @@ jobs:
         
       - name: Run Tests
         continue-on-error: true
-        run:  npm test              
+        run:  npm test   
+        
+      - name: Generate report
+        uses: actions/upload-artifact@v2
+        with:
+         name: Myreport.html
+         path: "**/cucumber-report.html"       
+       
           
