@@ -26,15 +26,10 @@ jobs:
           node-version: 16
 
       - name: Install libraries
-        run: npm install --save-dev @cucumber/pretty-formatter @cucumber/cucumber selenium-webdriver assert chromedriver   
+        run: npm install 
         timeout-minutes: 10
         
       - name: Run Tests
         continue-on-error: true
         run:  npm test              
-       
-      - name: Generate report
-        uses: actions/upload-artifact@v2
-        with:
-         name: Myreport.html
-         path: "**/cucumber-report.html"      
+          
